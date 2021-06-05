@@ -1,0 +1,73 @@
+<p>registro-input works!</p>
+<div class="container">
+  <form #mascotasForm="ngForm" (ngSubmit) = "enviar()">
+    <div class="form-group">
+      <label>Nombre Mascota</label>
+      <input type="text" class="form-control" id="nombreMascota"
+        name="nombreMascota" required [(ngModel)]="modelo.nombre"
+        #nombreMascota="ngModel"/>
+      <div class="alert alert-danger" [hidden] = "nombreMascota.valid
+        || nombreMascota.pristine">
+        El nombre de la mascota es obligatorio
+      </div>
+     </div>
+    <div class="form-group">
+        <label for="fechaNacimiento">Fecha de nacimiento</label>
+        <input type="date" class ="form-control" id="fechaNacimiento"
+        name="fechaNacimineto" required [(ngModel)] ="modelo.fechaNacimiento"
+        #fechaNacimiento="ngModel"/>
+        <div class="alert alert-danger" [hidden]="fechaNacimiento.valid
+        ||fechaNacimiento.pristine">
+          La fecha de nacimiento de la mascota es obligatoria
+        </div>
+    </div>
+
+    <div class="form-group">
+      <label>Raza Mascota</label>
+      <input type="text" class="form-control" id="razaMascota"
+        name="razaMascota" required [(ngModel)]="modelo.raza"
+        #razaMascota="ngModel"/>
+      <div class="alert alert-danger" [hidden] = "razaMascota.valid
+        || razaMascota.pristine">
+        La raza de la mascota es obligatorio
+      </div>
+     </div>
+
+     <div class="form-group">
+      <label>Sexo Mascota</label>
+      <input type="text" class="form-control" id="razaMascota"
+        name="sexoMascota" required [(ngModel)]="modelo.sexo"
+        #sexoMascota="ngModel"/>
+      <div class="alert alert-danger" [hidden] = "sexoMascota.valid
+        || sexoMascota.pristine">
+        El sexo de la mascota es obligatorio
+      </div>
+     </div>
+
+     <div class="form-group">
+      <label>Descripcion Mascota</label>
+      <input type="text" class="form-control" id="descriptionMascota"
+        name="descriptionMascota" required [(ngModel)]="modelo.description"
+        #descriptionMascota="ngModel"/>
+      <div class="alert alert-danger" [hidden] = "descriptionMascota.valid
+        || descriptionMascota.pristine">
+        La descripcion de la mascota es obligatorio
+      </div>
+     </div>
+
+     <div class="form-group">
+      <label>Edad de la Mascota</label>
+      <input type="text" class="form-control" id="edadMascota"
+        name="edadMascota" required [(ngModel)]="modelo.edad"
+        #edadMascota="ngModel"/>
+      <div class="alert alert-danger" [hidden] = "edadMascota.valid
+        || edadMascota.pristine">
+        La edad de la mascota es obligatorio
+      </div>
+     </div>
+
+    <button type="submit" class="btn btn-success" [disabled]="!mascotasForm.form.valid" >
+      Enviar Información</button>
+        {{modelo.nombre }}
+  </form>
+</div>
