@@ -4,6 +4,8 @@ import { RegistroInputComponent } from './registro-input/registro-input.componen
 import {FormsModule} from '@angular/forms';
 import { RegistroListComponent } from './registro-list/registro-list.component';
 import {RouterModule} from '@angular/router';
+import { CatalogoService } from '../shared/services/catalogo-service';
+import { PropietarioService } from '../shared/services/propietario-service';
 
 @NgModule({
   declarations: [
@@ -12,23 +14,13 @@ import {RouterModule} from '@angular/router';
   ],
   imports: [
 
-    //http://localhost:4200/mascotas/input
-		//http://localhost:4200/mascotas/list
-		RouterModule.forRoot([
-      {path:'mascotas',children:[
-          {path:'list', component: RegistroListComponent},
-          {path:'input', component:RegistroInputComponent}
-        ]
-      }
-      ]),
-
     CommonModule,
     FormsModule,
     //http://localhost:4200/mascotas/input
     //http://localhost:4200/mascotas/list
     RouterModule.forRoot([
         {path:'mascotas' , children:[
-          {path:'list', component: RegistroListComponent},
+          {path:'list', component:RegistroListComponent},
           {path:'input', component:RegistroInputComponent}
         ]
       }
@@ -37,6 +29,10 @@ import {RouterModule} from '@angular/router';
   exports: [
     RegistroInputComponent,
     RegistroListComponent
+  ],
+  providers:[
+    CatalogoService,
+    PropietarioService
   ]
 
 })

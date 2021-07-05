@@ -9,6 +9,8 @@ import {RouterModule} from '@angular/router';
     AppComponent
   ],
   imports: [
+    BrowserModule,
+    MascotasModule,
     RouterModule.forRoot([
 			{
 				path:'', children:[
@@ -16,9 +18,7 @@ import {RouterModule} from '@angular/router';
 				]
 			}
 		]),
-    BrowserModule,
-    MascotasModule,
-    RouterModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

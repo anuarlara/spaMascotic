@@ -1,19 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RegistroInputComponent } from './registro-input.component';
 
-describe('RegistroInputComponent', () => {
-  let component: RegistroInputComponent;
-  let fixture: ComponentFixture<RegistroInputComponent>;
+import { PropietarioInputComponent } from './propietario-input.component';
+
+describe('PropietarioInputComponent', () => {
+  let component: PropietarioInputComponent;
+  let fixture: ComponentFixture<PropietarioInputComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegistroInputComponent ]
+      declarations: [ PropietarioInputComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RegistroInputComponent);
+    fixture = TestBed.createComponent(PropietarioInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
