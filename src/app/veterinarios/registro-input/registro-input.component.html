@@ -1,0 +1,78 @@
+<div class="container">
+
+  <form #veterinarioForm="ngForm" (ngSubmit) = "enviar()">
+    <div class="form-group">
+      <label for="nombreVeterinario">Nombre</label>
+      <input type="text" class="form-control" id="nombreVeterinario"
+        name="nombreVeterinario" required [(ngModel)] ="modelo.nombre"
+        #nombreVeterinario="ngModel"/>
+      <div class="alert alert-danger" [hidden]="nombreVeterinario.valid
+        ||nombreVeterinario.pristine">
+        El nombre del veterinario es obligatorio
+      </div>
+    </div>
+    <div class="form group">
+      <label for="apellidoPaterno">Apellido Paterno</label>
+      <input type="text" class="form-control" id="apellidoPaterno"
+        name="apellidoPaterno" required [(ngModel)] ="modelo.apellidoPaterno"
+        #apellidoPaterno="ngModel"/>
+      <div class="alert alert-danger" [hidden]="apellidoPaterno.valid
+        ||apellidoPaterno.pristine">
+        El apellido paterno del veterinario es obligario
+      </div>
+    </div>
+    <div class="form group">
+      <label for="apellidoMaterno">Apellido Materno</label>
+      <input type="text" class="form-control" id="apellidoMaterno"
+        name="apellidoMaterno" required [(ngModel)] ="modelo.apellidoMaterno"
+        #apellidoMaterno="ngModel"/>
+      <div class="alert alert-danger" [hidden]="apellidoMaterno.valid
+        ||apellidoMaterno.pristine">
+        El apellido materno del propietario de la mascota es obligatorio
+      </div>
+    </div>
+    <div class="form group">
+      <label for="cedula">Cedula</label>
+      <input type="text" class="form-control" id="cedula"
+        name="cedula" required [(ngModel)] ="modelo.numCedula"
+        #cedula="ngModel"/>
+      <div class="alert alert-danger" [hidden]="cedula.valid
+        ||cedula.pristine">
+        El numero de cedula del veterinario es obligario
+      </div>
+    </div>
+    <div class="form group">
+      <label for="telefono">Telefono</label>
+      <input type="text" class="form-control" id="telefono"
+        name="telefono" required [(ngModel)] ="modelo.telefono"
+        #telefono="ngModel"/>
+      <div class="alert alert-danger" [hidden]="telefono.valid
+        ||telefono.pristine">
+        El numero de telefono del veterinario es obligario
+      </div>
+    </div>
+    <div class="form group">
+      <label for="correoElectronico">Correo electronico</label>
+      <input type="email" class="form-control" id="correoElectronico"
+        name="correoElectronico" required [(ngModel)] ="modelo.correo"
+        #correoElectronico="ngModel"/>
+      <div class="alert alert-danger" [hidden]="correoElectronico.valid
+        ||correoElectronico.pristine">
+        El correo electronico del propietario de la mascota es obligario
+      </div>
+    </div>
+    <div class="form group">
+      <label for="direccion">Direccion</label>
+      <input type="text" class="form-control" id="direccion"
+        name="direccion" required [(ngModel)] ="modelo.direccion"
+        #direccion="ngModel"/>
+      <div class="alert alert-danger" [hidden]="direccion.valid
+        ||direccion.pristine">
+        La direccion del propietario de la mascota es obligatoria
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!veterinarioForm.form.valid" >Enviar Información</button>
+
+  </form>
+
+</div>

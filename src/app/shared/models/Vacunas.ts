@@ -6,7 +6,7 @@ export class Vacunas{
   public idMascota?:number;
   public fecha?:string;
   public tipovacuna?:TipoVacuna;
-  public observaacion?:string;
+  public observacion?:string;
   public veterinario?:Veterinario;
   public vacunas?:Vacunas;
 }

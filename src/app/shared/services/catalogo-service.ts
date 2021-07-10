@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { RazaMascota } from "../models/raza-mascota";
 import { TipoMascota } from "../models/tipo-mascota";
+import { TipoVacuna } from "../models/tipo-vacuna";
 
 @Injectable()
 export class CatalogoService{
@@ -55,4 +56,26 @@ export class CatalogoService{
 
     return array;
   }
+  public getTipoVacunaMascota(tipoMascota:any):Array<TipoVacuna>{
+    let array= new Array<TipoVacuna>();
+    let v1 = new TipoVacuna();
+    v1.id = 1;
+    v1.nombre = "Rabia";
+    v1.tipoMascota = tipoMascota;
+    array.push(v1);
+    if(tipoMascota.id == 1) { //perro
+      let v2 = new TipoVacuna();
+      v2.id = 2;
+      v2.nombre = "Parvovirus";
+      v2.tipoMascota = tipoMascota;
+      array.push(v2);
+    }else{ //gato
+      let v3 = new TipoVacuna();
+      v3.id = 3;
+      v3.nombre = "Rabia";
+      v3.tipoMascota = tipoMascota;
+      array.push(v3);
+    }
+    return array;
+    }
 }

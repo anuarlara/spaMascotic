@@ -6,6 +6,8 @@ import { RegistroListComponent } from './registro-list/registro-list.component';
 import {RouterModule} from '@angular/router';
 import { CatalogoService } from '../shared/services/catalogo-service';
 import { PropietarioService } from '../shared/services/propietario-service';
+import { VeterinarioService } from '../shared/services/veterinario-service';
+import { MascotaService } from '../shared/services/mascota-service';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { PropietarioService } from '../shared/services/propietario-service';
   ],
   providers:[
     CatalogoService,
-    PropietarioService
+    PropietarioService,
+    VeterinarioService,
+    MascotaService,
   ]
 
 })

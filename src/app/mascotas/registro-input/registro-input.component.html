@@ -1,6 +1,19 @@
-<p>registro-input works!</p>
 <div class="container">
   <form #mascotasForm="ngForm" (ngSubmit) = "enviar()">
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Información de la mascota</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Información de Propietario</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="messages-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Historial de Vacunas</button>
+      </li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
     <div class="form-group">
       <label>Nombre Mascota</label>
       <input type="text" class="form-control" id="nombreMascota"
@@ -21,6 +34,17 @@
           La fecha de nacimiento de la mascota es obligatoria
         </div>
     </div>
+
+    <div class="form-group">
+      <label>Edad de la Mascota</label>
+      <input type="text" class="form-control" id="edadMascota"
+        name="edadMascota" required [(ngModel)]="modelo.edad"
+        #edadMascota="ngModel"/>
+      <div class="alert alert-danger" [hidden] = "edadMascota.valid
+        || edadMascota.pristine">
+        La edad de la mascota es obligatorio
+      </div>
+     </div>
 
     <div class="form-group">
       <label for="tipoMascota">Tipo</label>
@@ -44,17 +68,20 @@
         <div class="alert alert-danger" [hidden] = "modelo.raza != undefined">
           La Raza de la mascota es obligatoria, es necesario elegir primero el tipo mascota
         </div>
-
-     <div class="form-group">
-      <label>Sexo Mascota</label>
-      <input type="text" class="form-control" id="razaMascota"
-        name="sexoMascota" required [(ngModel)]="modelo.sexo"
-        #sexoMascota="ngModel"/>
-      <div class="alert alert-danger" [hidden] = "sexoMascota.valid
-        || sexoMascota.pristine">
-        El sexo de la mascota es obligatorio
       </div>
-     </div>
+
+        <div class="form-group">
+          <label for="sexo">Sexo</label>
+          <select id="sexo" class="form-select" name="sexo"
+            required [(ngModel)] ="modelo.sexo">
+            <option [value]="undefined" selected disabled>---</option>
+            <option>Hembra</option>
+            <option>Macho</option>
+            </select>
+            <div class="alert alert-danger" [hidden]="modelo.sexo != undefined">
+              El sexo de mascota es obligatorio
+          </div>
+        </div>
 
      <div class="form-group">
       <label>Descripcion Mascota</label>
@@ -66,20 +93,171 @@
         La descripcion de la mascota es obligatorio
       </div>
      </div>
-
-     <div class="form-group">
-      <label>Edad de la Mascota</label>
-      <input type="text" class="form-control" id="edadMascota"
-        name="edadMascota" required [(ngModel)]="modelo.edad"
-        #edadMascota="ngModel"/>
-      <div class="alert alert-danger" [hidden] = "edadMascota.valid
-        || edadMascota.pristine">
-        La edad de la mascota es obligatorio
-      </div>
      </div>
 
-    <button type="submit" class="btn btn-success" [disabled]="!mascotasForm.form.valid" >
-      Enviar Información</button>
-        {{modelo.nombre }}
+     <div class="form-group">
+      <label for="nombreSelector">Propietario</label>
+      <select id="nombreSelector" class="form-select" name="nombreSelector"
+        required [(ngModel)] ="modelo.propietario" (change) = "propietarioSelectChange()"      >
+        <option [value]="undefined" selected disabled>---</option>
+        <option *ngFor="let p of propietarioArray" [ngValue]="p">{{p.toString()}}</option>
+        </select>
+        Selecciona de la lista un propietario, si no existe crea uno nuevo con el boton mas
+      </div>
 
+      <br>
+      <button type="button" name="btnNuevoPropietario" class="btn btn-secondary" (click)="nuevoPropietario()">+</button>
+
+      <div class="form-group">
+        <label for="nombrePropietario">Nombre del Propietario</label>
+        <input type="text" class="form-control" id="nombrePropietario"
+          name="nombrePropietario" required [(ngModel)] ="propietarioModelo.nombre"
+          #nombrePropietario="ngModel"/>
+        <div class="alert alert-danger" [hidden]="nombrePropietario.valid
+          ||nombrePropietario.pristine">
+          El nombre del propietario de la mascota es obligatorio
+        </div>
+      </div>
+
+      <div class="form group">
+        <label for="apellidoPaterno">Apellido Paterno</label>
+        <input type="text" class="form-control" id="apellidoPaterno"
+          name="apellidoPaterno" required [(ngModel)] ="propietarioModelo.apellidoPaterno"
+          #apellidoPaterno="ngModel"/>
+        <div class="alert alert-danger" [hidden]="apellidoPaterno.valid
+          ||apellidoPaterno.pristine">
+          El apellido paterno del propietario de la mascota es obligario
+        </div>
+      </div>
+
+      <div class="form group">
+        <label for="apellidoMaterno">Apellido Materno</label>
+        <input type="text" class="form-control" id="apellidoMaterno"
+          name="apellidoMaterno" required [(ngModel)] ="propietarioModelo.apellidoMaterno"
+          #apellidoMaterno="ngModel"/>
+        <div class="alert alert-danger" [hidden]="apellidoMaterno.valid
+          ||apellidoMaterno.pristine">
+          El apellido materno del propietario de la mascota es obligatorio
+        </div>
+      </div>
+
+      <div class="form group">
+        <label for="telefono">Telefono</label>
+        <input type="text" class="form-control" id="telefono"
+          name="telefono" required [(ngModel)] ="propietarioModelo.telefono"
+          #telefono="ngModel"/>
+        <div class="alert alert-danger" [hidden]="telefono.valid
+          ||telefono.pristine">
+          El numero de telefono del propietario de la mascota es obligario
+        </div>
+      </div>
+
+      <div class="form group">
+        <label for="correoElectronico">Correo electronico</label>
+        <input type="email" class="form-control" id="correoElectronico"
+          name="correoElectronico" required [(ngModel)] ="propietarioModelo.correoElectronico"
+          #correoElectronico="ngModel"/>
+        <div class="alert alert-danger" [hidden]="correoElectronico.valid
+          ||correoElectronico.pristine">
+          El correo electronico del propietario de la mascota es obligario
+        </div>
+      </div>
+
+      <div class="form group">
+        <label for="direccion">Direccion</label>
+        <input type="text" class="form-control" id="direccion"
+          name="direccion" required [(ngModel)] ="propietarioModelo.direccion"
+          #direccion="ngModel"/>
+        <div class="alert alert-danger" [hidden]="direccion.valid
+          ||direccion.pristine">
+          La direccion del propietario de la mascota es obligatoria
+        </div>
+      </div>
+
+
+
+         <form #vacunasForm="ngForm" (ngSubmit)="agregarVacuna()" >
+          <div class="form group">
+            <label for="vacunaFecha">Fecha</label>
+            <input type="date" class="form-control" id="vacunaFecha"
+              name="vacunaFecha" required [(ngModel)] ="vacunaModelo.fecha"
+              #vacunaFecha="ngModel"/>
+            <div class="alert alert-danger" [hidden] = "vacunaFecha.valid
+            ||vacunaFecha.pristine">
+          </div>
+          La fecha de la vacuna es obligatoria
+        </div>
+
+        <div class="form group">
+          <label for="vacunaTipo">Tipo</label>
+          <select id="vacunaTipo" class="form-select" name="vacunaTipo"
+            required [(ngModel)] ="vacunaModelo.tipovacuna"
+            #vacunaTipo="ngModel">
+            <option [value]="undefined" selected disabled>---</option>
+            <option *ngFor="let tv of tipoVacunaArray" [ngValue] ="tv"> {{tv.nombre}} </option>
+          </select>
+          <div class="alert alert-danger" [hidden] ="vacunaModelo.tipovacuna != undefined">
+            El tipo de vacuna es obligatorio, es necesario seleccionar primero el tipo de mascota
+          </div>
+        </div>
+
+        <div class="form group">
+          <label for="vacunaVeterinario">Veterinario</label>
+            <select id="vacunaVeterinario" class="form-select" name="vacunaVeterinario"
+              required [(ngModel)] ="vacunaModelo.veterinario"
+              #vacunaVeterinario="ngModel">
+              <option [value] = "undefined" selected disable>----</option>
+              <option *ngFor="let v of veterinarioArray" [ngValue] = "v">
+                {{v.nombre + " "+ v.apellidoPaterno + " " + v.apellidoMaterno}} </option>
+              </select>
+              <div class="alert alert-danger" [hidden] ="vacunaModelo.veterinario != undefined">
+                El veterinario es obligatorio
+
+              </div>
+        </div>
+
+        <div class="form-group">
+          <label for="vacunaObservacion">Observacion</label>
+          <input type="text" class="form-control" id="vacunaObservacion"
+            name="vacunaObservacion" required [(ngModel)] ="vacunaModelo.observacion"
+            #vacunaObservacion="ngModel"/>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-secondary" [disabled] ="!vacunasForm.form.valid"
+          >Agregar vacuna</button>
+          <br>
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Fecha</th>
+                <th scope="col">Tipo vacuna</th>
+                <th scope="col">Nombre veterinario</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let vacuna of vacunasArray; index as i">
+                <td>{{vacuna.fecha}}</td>
+                <td *ngIf="vacuna.tipovacuna != undefined">{{vacuna.tipovacuna.nombre}}</td>
+                <td *ngIf="vacuna.veterinario != undefined">{{vacuna.veterinario.nombre + " " +
+                  vacuna.veterinario.apellidoPaterno + " " + vacuna.veterinario.apellidoMaterno}}</td>
+                  <td>
+                    <button class="btn btn-online-danger" type=button (click)="eliminarVacuna(vacuna)" >Eliminar</button>
+                  </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </form>
+
+
+
+        </div>
+    <button type="submit" class="btn btn-success" [disabled]="!mascotasForm.form.valid">
+      Enviar Información</button>
+
+
+
+</form>
 </div>
